@@ -1,8 +1,8 @@
 package com.test.concord.service;
 
-import com.test.concord.model.User;
+import com.test.concord.dto.ResponseUserDto;
 
 public interface UserService {
 
-    User findUserById(Long id);
+    ResponseUserDto findUserById(Long id);
 }
