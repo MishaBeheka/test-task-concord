@@ -5,10 +5,12 @@ import com.test.concord.exceptions.UserNotFountException;
 import com.test.concord.model.User;
 import com.test.concord.repository.UserRepository;
 import com.test.concord.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -24,19 +26,20 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() ->
                         new UserNotFountException("Can't find user by id = " + id));
-        //TODO logs
+        log.info("Found user by id: {}", id);
+        log.info("USER: {}", user.getFullName());
         return new ResponseUserDto(user.getFullName());
     }
 
     public void userInit() {
         Optional<User> optionalUser = userRepository.findById(1L);
         if (optionalUser.isPresent()) {
-            //TODO logs
+            log.info("User table not empty!");
         } else {
             User user = new User();
-            user.setFullName("fsdfsd");
-            user = userRepository.save(user);
-            System.out.println(); //TODO logs
+            user.setFullName("Test Testov");
+            userRepository.save(user);
+            log.info("Default user was initialized!");
         }
     }
 }
