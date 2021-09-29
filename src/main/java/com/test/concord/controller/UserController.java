@@ -6,10 +6,7 @@ import com.test.concord.dto.ResponseUserDto;
 import com.test.concord.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -22,7 +19,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/find-user-by-id")
+    @PostMapping("/find-user-by-id")
     public ResponseEntity<?> findUserBId(@RequestBody RequestUserDto userDto) {
         log.info("Was calling API /find-user-by-id");
         log.info("Id = " + userDto.getId());
